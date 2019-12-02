@@ -33,7 +33,6 @@ namespace day2
                         break;
                     default:
                         running = false;
-                        //Console.WriteLine("Done, we ded");
                         break;
                 }
                 currentPos += 4;
@@ -49,46 +48,35 @@ namespace day2
         {
             var intCodes = File.ReadAllText("input.txt").Split(',').Select(Int32.Parse).ToArray();
 
-            Console.WriteLine(LoopTheOpCode(intCodes));
-
-            Console.ReadKey();
+            Console.WriteLine($"Part 1: {LoopTheOpCode(intCodes)}");
         }
 
         static void Part2()
         {
             var intCodes = File.ReadAllText("input.txt").Split(',').Select(Int32.Parse).ToList();
-            //List<int> intCodes = new List<int>();
-            //foreach (var opCode in allOpCodes)
-            //{
-            //    intCodes.Add(int.Parse(opCode));
-            //}
 
-            
-            for(int i= 0; i < 100; i++)
+            for(int noun = 0; noun < 100; noun++)
             {
-                for (int j = 0; j < 100; j++)
+                for (int verb = 0; verb < 100; verb++)
                 {
                     var workingSet = intCodes.Select(x => x).ToArray();
-                    workingSet[1] = i;
-                    workingSet[2] = j;
+                    workingSet[1] = noun;
+                    workingSet[2] = verb;
                     LoopTheOpCode(workingSet);
                     if(workingSet[0] == 19690720)
                     {
-                        Console.WriteLine(100 * i + j);
+                        Console.WriteLine($"Part 2: {100 * noun + verb}");
                         break;
                     }
                 }
             }
-
-            //Console.WriteLine($"Codes found {intCodes[1]} and {intCodes[2]}");
-            //Console.WriteLine(100 * intCodes[1] * intCodes[2]);
-            Console.ReadLine();
-                
         }
+
         static void Main(string[] args)
         {
             Part1();
             Part2();
+            Console.ReadLine();
         }
     }
 }
